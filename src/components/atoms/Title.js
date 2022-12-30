@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Title({ className = '', children, ...props }) {
+function Title({ className = '', children }) {
   return (
-    <h1 className={`${className}`} {...props}>
+    <h1 className={`${className}`}>
       {children }
     </h1>
   );

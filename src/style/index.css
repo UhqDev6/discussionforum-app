@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Poppins', sans-serif;
+  }
+  * {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+  .sidebar-container {
+    @apply from-pink-400 to-yellow-100 h-[100%] w-[20rem] hover:skew-y-3 rounded-3xl ml-20 p-4 border transition-all duration-500 border-solid bg-gradient-to-r opacity-70 relative
+  }
+  .sidebar {
+    @apply flex items-center mt-2 p-4 rounded-lg cursor-pointer hover:bg-white transition-all duration-300 
+  }
+  .navbar {
+    @apply from-pink-400 to-yellow-100 h-[20%] w-[85%] mx-auto rounded-3xl sm:p-4 border transition-all duration-500 border-solid bg-gradient-to-r opacity-70
+  }
+  .thread-limit {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+}

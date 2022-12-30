@@ -14,15 +14,14 @@ const api = (() => {
   const getAccessToken = () => localStorage.getItem('access_token');
 
   const register = async ({
-    id, name, email, password,
+    name, email, password,
   }) => {
-    const response = await fetch(`${BASE_URL}/users`, {
+    const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id,
         name,
         email,
         password,
@@ -103,7 +102,7 @@ const api = (() => {
     return users;
   };
 
-  const getAllForums = async () => {
+  const getAllThreads = async () => {
     const response = await fetch(`${BASE_URL}/threads`);
     const responseJson = await response.json();
     const { status, message } = responseJson;
@@ -115,8 +114,23 @@ const api = (() => {
     const {
       data: { threads },
     } = responseJson;
-
     return threads;
+  };
+
+  const getAllLeaderBoards = async () => {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { leaderboards },
+    } = responseJson;
+
+    return leaderboards;
   };
 
   return {
@@ -126,7 +140,8 @@ const api = (() => {
     login,
     getOwnProfile,
     getAllUsers,
-    getAllForums,
+    getAllThreads,
+    getAllLeaderBoards,
   };
 })();
 

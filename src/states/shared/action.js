@@ -1,21 +1,23 @@
-import { showLoading } from 'react-redux-loading-bar';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-import { receiveForumActionCreator } from '../forums/action';
+import { receiveThreadActionCreator } from '../threads/action';
 import { receiverUserActionCreator } from '../users/action';
 
-const asyncPopulateUserAndForum = () => async (dispatch) => {
-  dispatch(showLoading());
+const asyncPopulateUserAndThreads = () => async (dispatch) => {
   try {
+    dispatch(showLoading());
     const users = await api.getAllUsers();
-    const forums = await api.getAllForums();
+    const threads = await api.getAllThreads();
 
     dispatch(receiverUserActionCreator(users));
-    dispatch(receiveForumActionCreator(forums));
+    dispatch(receiveThreadActionCreator(threads));
   } catch (err) {
     alert(err.message);
+  } finally {
+    dispatch(hideLoading());
   }
 };
 
 export {
-  asyncPopulateUserAndForum,
+  asyncPopulateUserAndThreads,
 };

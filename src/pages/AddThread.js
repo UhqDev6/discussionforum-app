@@ -1,12 +1,12 @@
 import React from 'react';
 
-function DetailPage() {
+function AddThread() {
   return (
     <>
-      <p>saya</p>
       <p>kamu</p>
+      <p>aku</p>
     </>
   );
 }
 
-export default DetailPage;
+export default AddThread;
