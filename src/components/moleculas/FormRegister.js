@@ -60,7 +60,7 @@ function FormRegister({ register }) {
           <p className="text-slate-600">
             Do you have account ?
             {' '}
-            <Link to="/login" className="underline">Get hare</Link>
+            <Link to="/" className="underline">Get hare</Link>
           </p>
         </div>
       </div>
