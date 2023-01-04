@@ -1,4 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import { toast } from 'react-toastify';
 import { ActionType } from '../../constants/ActionType';
 import api from '../../utils/api';
 
@@ -23,8 +24,9 @@ const asyncSetAuthUser = ({ email, password }) => async (dispatch) => {
     api.putAccessToken(token);
     const authUser = await api.getOwnProfile();
     dispatch(setAuthUserActionCreator(authUser));
-  } catch (error) {
-    alert(error.message);
+    toast('Welcome to app');
+  } catch (err) {
+    toast.error(err.message);
   } finally {
     dispatch(hideLoading());
   }

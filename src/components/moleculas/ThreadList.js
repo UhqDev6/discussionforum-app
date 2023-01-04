@@ -5,16 +5,16 @@ import Card from '../atoms/Card';
 import ThreadBody from '../atoms/ThreadBody';
 import ThreadTitle from '../atoms/ThreadTitle';
 import ThreadHead from '../atoms/ThreadHead';
+import ThreadFooter from '../atoms/ThreadFooter';
 import ThreadItems from '../atoms/ThreadItems';
+// import ThreadItems from '../atoms/ThreadItems';
 
 function ThreadList(props) {
   const {
-    threads, filtered, isDetails,
+    threads, filtered,
   } = props;
 
-  const { users = [], authUser = {} } = useSelector((states) => states);
-
-  const handleUserDetail = (id) => users?.filter((user) => user.id === id)[0];
+  const { users = [] } = useSelector((states) => states);
 
   if (!filtered) {
     return (
@@ -23,33 +23,7 @@ function ThreadList(props) {
           {
             threads?.map((thread) => (
               <Card className="h-auto relative" key={`${thread?.id}-filtered`}>
-                <div>
-                  {
-                    isDetails ? (
-                      <ThreadHead />
-                    ) : (
-                      <ThreadHead
-                        avatar={handleUserDetail(thread.ownerId)?.avatar}
-                        name={handleUserDetail(thread.ownerId)?.name}
-                        id={thread?.id}
-                      />
-                    )
-                  }
-                  <Card.Title>
-                    <ThreadTitle title={thread?.title} category={thread?.category} />
-                  </Card.Title>
-                  <Card.Body>
-                    <ThreadBody body={thread?.body} contentFull={isDetails} />
-                  </Card.Body>
-                  <Card.Footer>
-                    <ThreadItems
-                      createdAt={thread?.createdAt}
-                      upVotesBy={thread?.upVotesBy}
-                      downVotesBy={thread?.downVotesBy}
-                      totalComments={thread?.totalComments}
-                    />
-                  </Card.Footer>
-                </div>
+                <ThreadItems key={thread?.id} threads={thread} users={users} />
               </Card>
             ))
           }
@@ -63,33 +37,7 @@ function ThreadList(props) {
         {
           threads?.filter((threadFilter) => threadFilter?.category === filtered).map((thread) => (
             <Card className="h-auto relative" key={thread?.id}>
-              <div>
-                {
-                    isDetails ? (
-                      <ThreadHead />
-                    ) : (
-                      <ThreadHead
-                        avatar={handleUserDetail(thread.ownerId)?.avatar}
-                        name={handleUserDetail(thread.ownerId)?.name}
-                        id={thread?.id}
-                      />
-                    )
-                }
-                <Card.Title>
-                  <ThreadTitle title={thread?.title} category={thread?.category} />
-                </Card.Title>
-                <Card.Body>
-                  <ThreadBody body={thread?.body} contentFull={isDetails} />
-                </Card.Body>
-                <Card.Footer>
-                  <ThreadItems
-                    createdAt={thread?.createdAt}
-                    upVotesBy={thread?.upVotesBy}
-                    downVotesBy={thread?.downVotesBy}
-                    totalComments={thread?.totalComments}
-                  />
-                </Card.Footer>
-              </div>
+              <ThreadItems key={thread?.id} threads={thread} users={users} />
             </Card>
           ))
         }
@@ -97,11 +45,6 @@ function ThreadList(props) {
     </div>
   );
 }
-
-ThreadList.defaultProps = {
-  filtered: '',
-  isDetails: false,
-};
 
 const threadShape = {
   title: PropTypes.string,
@@ -115,7 +58,10 @@ const threadShape = {
 ThreadList.propTypes = {
   threads: PropTypes.arrayOf(PropTypes.shape(threadShape)).isRequired,
   filtered: PropTypes.string,
-  isDetails: PropTypes.bool,
+};
+
+ThreadList.defaultProps = {
+  filtered: '',
 };
 
 export default ThreadList;

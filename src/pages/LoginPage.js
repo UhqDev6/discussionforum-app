@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import WrapperView from '../components/atoms/WrapperView';
 import FormLogin from '../components/moleculas/FormLogin';
 import Sidebar from '../components/moleculas/Sidebar';
 import { asyncSetAuthUser } from '../states/authUser/action';
@@ -12,9 +13,11 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex">
-      <FormLogin login={onLogin} />
-    </div>
+    <WrapperView>
+      <div className="flex">
+        <FormLogin login={onLogin} />
+      </div>
+    </WrapperView>
   );
 }
 

@@ -11,8 +11,6 @@ function LeaderBoards() {
     dispatch(asyncReceiveLeaderboard());
   }, [dispatch]);
 
-  console.log(leaderBoards);
-
   return (
     <div className="container relative">
       <div className="navbar -ml-2 sm:-ml-0 md:ml-10">
@@ -22,7 +20,7 @@ function LeaderBoards() {
           </div>
         </div>
       </div>
-      <div className="-ml-32 sm:ml-0">
+      <div className="-ml-32 sm:ml-0 p-8 sm:p-0">
         <div className="container flex gap-5 items-center bg-white p-2 w-[95%] mx-auto mt-2 sm:-ml-12 md:ml-0">
           <div className="w-[88%] ml-14">
             <h3 className="text-lg">User</h3>

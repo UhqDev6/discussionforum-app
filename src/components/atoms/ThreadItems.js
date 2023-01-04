@@ -1,44 +1,138 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  MdThumbUpAlt, MdThumbDownOffAlt, MdThumbUpOffAlt, MdThumbDownAlt, MdReply,
-} from 'react-icons/md';
-import { postedAt } from '../../utils';
+import { useDispatch, useSelector } from 'react-redux';
+import Card from './Card';
+import ThreadHead from './ThreadHead';
+import ThreadTitle from './ThreadTitle';
+import ThreadBody from './ThreadBody';
+import ThreadFooter from './ThreadFooter';
 
-function ThreadItems(props) {
+export default function ThreadItems(props) {
   const {
-    createdAt,
-    upVotesBy,
-    downVotesBy,
-    totalComments,
+    threadDetail,
+    threads,
+    isDetails,
+    users,
   } = props;
-  console.log(upVotesBy);
+
+  // const dispatch = useDispatch();
+  const handleUserDetails = (id) => users?.filter((user) => user?.id === id)[0];
+
   return (
-    <div className="flex -mt-10 gap-4">
-      <div className="flex gap-2">
-        <MdThumbUpOffAlt color="#E47AB3" size="16px" />
-        <span className="text-[0.75rem] ">{upVotesBy?.length || '0'}</span>
-      </div>
-      <div className="flex gap-2">
-        <MdThumbDownOffAlt color="#E47AB3" size="16px" />
-        <span className="text-[0.75rem] ">{downVotesBy?.length || '0'}</span>
-      </div>
-      <div className="flex gap-2">
-        <MdReply color="#E47AB3" size="16px" />
-        <span className="text-[0.75rem] ">{totalComments?.length || '0'}</span>
-      </div>
-      <div>
-        <p className="text-[0.75rem] text-pink-500">{postedAt(createdAt)}</p>
-      </div>
+    <div>
+      {
+        isDetails ? (
+          <ThreadHead
+            avatar={threadDetail?.owner?.avatar}
+            name={threadDetail?.owner?.name}
+            id={threadDetail?.id}
+            isDetails={isDetails}
+          />
+        ) : (
+          <ThreadHead
+            avatar={handleUserDetails(threads?.ownerId)?.avatar}
+            name={handleUserDetails(threads?.ownerId)?.name}
+            id={threads?.id}
+            isDetails={isDetails}
+          />
+        )
+      }
+      <Card.Title>
+        {
+          isDetails ? (
+            <ThreadTitle
+              title={threadDetail?.title}
+              category={threadDetail?.category}
+              isDetails={isDetails}
+            />
+          ) : (
+            <ThreadTitle
+              id={threads?.id}
+              title={threads?.title}
+              category={threads?.category}
+              isDetails={isDetails}
+            />
+          )
+        }
+      </Card.Title>
+      <Card.Body>
+        {
+          isDetails ? (
+            <ThreadBody body={threadDetail?.body} contentFull={isDetails} />
+          ) : (
+            <ThreadBody body={threads?.body} />
+          )
+        }
+      </Card.Body>
+      <Card.Footer>
+        {
+          isDetails ? (
+            <ThreadFooter
+              createdAt={threadDetail?.createdAt}
+              upVotesBy={threadDetail?.upVotesBy}
+              downVotesBy={threadDetail?.downVotesBy}
+              comments={threadDetail?.comments}
+              isDetails={isDetails}
+            />
+          ) : (
+            <ThreadFooter
+              createdAt={threads?.createdAt}
+              upVotesBy={threads?.upVotesBy}
+              downVotesBy={threads?.downVotesBy}
+              totalComments={threads?.totalComments}
+              isDetails={isDetails}
+            />
+          )
+        }
+      </Card.Footer>
     </div>
   );
 }
 
-ThreadItems.propTypes = {
-  createdAt: PropTypes.string.isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  totalComments: PropTypes.number.isRequired,
+const userArray = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  avatar: PropTypes.string,
+};
+const threadShape = {
+  title: PropTypes.string,
+  body: PropTypes.string,
+  ownerId: PropTypes.string,
+  upVotesBy: PropTypes.array,
+  downVotesBy: PropTypes.array,
+  comments: PropTypes.array,
 };
 
-export default ThreadItems;
+const threadsShape = {
+  title: PropTypes.string,
+  body: PropTypes.string,
+  ownerId: PropTypes.string,
+  upVotesBy: PropTypes.array,
+  downVotesBy: PropTypes.array,
+  totalComments: PropTypes.number,
+};
+
+ThreadItems.propTypes = {
+  threadDetail: PropTypes.shape(threadShape),
+  threads: PropTypes.shape(threadsShape),
+  users: PropTypes.arrayOf(PropTypes.shape(userArray)).isRequired,
+  isDetails: PropTypes.bool,
+};
+
+ThreadItems.defaultProps = {
+  isDetails: false,
+  threadDetail: {
+    title: '',
+    ownerId: '',
+    body: '',
+    upVotesBy: [],
+    downVotesBy: [],
+  },
+  threads: {
+    title: '',
+    ownerId: '',
+    body: '',
+    upVotesBy: [],
+    downVotesBy: [],
+  },
+};

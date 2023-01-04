@@ -41,16 +41,16 @@ function Footer(props) {
 }
 
 Card.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 Title.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 Body.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 Footer.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 
 Card.defaultProps = {

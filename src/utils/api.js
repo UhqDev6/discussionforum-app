@@ -117,6 +117,70 @@ const api = (() => {
     return threads;
   };
 
+  const createThread = async (payload) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { threads },
+    } = responseJson;
+
+    return threads;
+  };
+
+  const getDetailThread = async (id) => {
+    const response = await fetch(`${BASE_URL}/threads/${id}`, {
+      method: 'GET',
+    });
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { detailThread },
+    } = responseJson;
+
+    return detailThread;
+  };
+
+  const createComment = async (payload) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/threadId/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { comment },
+    } = responseJson;
+
+    return comment;
+  };
+
   const getAllLeaderBoards = async () => {
     const response = await fetch(`${BASE_URL}/leaderboards`);
     const responseJson = await response.json();
@@ -142,6 +206,9 @@ const api = (() => {
     getAllUsers,
     getAllThreads,
     getAllLeaderBoards,
+    createThread,
+    getDetailThread,
+    createComment,
   };
 })();
 

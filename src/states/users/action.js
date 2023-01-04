@@ -1,4 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import { toast } from 'react-toastify';
 import { ActionType } from '../../constants/ActionType';
 import api from '../../utils/api';
 
@@ -17,10 +18,12 @@ const asyncRegisterUser = ({
     await api.register({
       name, email, password,
     });
+    toast('Success created new account 👌');
   } catch (err) {
-    alert(err.message);
+    toast.error(err.message);
+  } finally {
+    dispatch(hideLoading());
   }
-  dispatch(hideLoading());
 };
 
 export {

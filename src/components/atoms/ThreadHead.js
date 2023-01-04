@@ -5,18 +5,35 @@ function ThreadHead(props) {
   const {
     avatar,
     name,
+    isDetails,
   } = props;
 
   return (
-    <div className="relative flex">
-      <div className="max-w-[2rem] max-h-[2rem] rounded-full flex absolute -top-0">
-        <img
-          src={avatar}
-          alt={avatar}
-          className="w-full h-full rounded-full object-cover"
-        />
+    <div className="relative w-full">
+      {
+        isDetails ? (
+          <div className="max-w-[3rem] max-h-[3rem] rounded-full mx-auto">
+            <img
+              src={avatar}
+              alt={avatar}
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
+        ) : (
+          <div className="max-w-[2rem] max-h-[2rem] rounded-full mx-auto">
+            <img
+              src={avatar}
+              alt={avatar}
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
+        )
+      }
+      <div className="justify-center flex w-full mt-[4px]">
+        <span className="text-xs font-light">
+          {name}
+        </span>
       </div>
-      <span className="text-xs font-light absolute ml-10">{name}</span>
     </div>
   );
 }
@@ -24,6 +41,7 @@ function ThreadHead(props) {
 ThreadHead.propTypes = {
   avatar: PropTypes.string,
   name: PropTypes.string,
+  isDetails: PropTypes.bool.isRequired,
 };
 
 ThreadHead.defaultProps = {

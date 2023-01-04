@@ -6,6 +6,8 @@ const threadsReducer = (threads = [], action = {}) => {
       return action.payload.threads;
     case ActionType.CLEAR_THREADS:
       return [];
+    case ActionType.ADD_THREADS:
+      return [action.payload.thread, ...threads];
     default:
       return threads;
   }
