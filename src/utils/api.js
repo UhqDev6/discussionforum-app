@@ -158,13 +158,15 @@ const api = (() => {
     return detailThread;
   };
 
-  const createComment = async (payload) => {
-    const response = await _fetchWithAuth(`${BASE_URL}/threads/threadId/comments`, {
+  const createComment = async ({ threadId, comment }) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        content: comment,
+      }),
     });
 
     const responseJson = await response.json();
@@ -175,10 +177,10 @@ const api = (() => {
     }
 
     const {
-      data: { comment },
+      data: { comments },
     } = responseJson;
 
-    return comment;
+    return comments;
   };
 
   const getAllLeaderBoards = async () => {

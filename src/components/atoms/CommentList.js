@@ -4,6 +4,7 @@ import {
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import parse from 'html-react-parser';
 import Card from './Card';
 import { postedAt } from '../../utils';
 
@@ -28,7 +29,9 @@ function CommentList(props) {
           <div className="bg-slate-100 w-full rounded-lg h-auto p-2">
             <span className="text-xs font-semibold">{comment?.owner?.name}</span>
             <p className="text-xs font-light tracking-wider leading-snug opacity-70 overflow-hidden ">
-              {comment?.content}
+              {
+                parse(comment?.content)
+              }
             </p>
           </div>
         </div>

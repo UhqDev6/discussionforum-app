@@ -30,8 +30,8 @@ const asyncCreateComment = ({ threadId, comment }) => async (dispatch) => {
       threadId,
       comment,
     });
-    dispatch(receiveCommentActionCreator(responseComment));
-    toast.success('Added new comment 👌');
+    dispatch(createCommentActionCreator(responseComment));
+    toast('Added new comment 👌');
   } catch (err) {
     toast.error(err.message);
   } finally {

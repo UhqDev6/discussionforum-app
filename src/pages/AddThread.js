@@ -9,13 +9,13 @@ function AddThread() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onAddThread = ({ title, body, category }) => {
+  const onAddThread = async ({ title, body, category }) => {
     const payload = {
       title,
       body,
       category,
     };
-    dispatch(asyncAddThread(payload));
+    await dispatch(asyncAddThread(payload));
     navigate(HOME_PAGE);
   };
   return (

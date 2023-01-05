@@ -7,7 +7,7 @@ function Button(props) {
   } = props;
   return (
     <button
-      className={`${className} [&>svg]:w-5 [&>svg]:h-5 [&>svg]:stroke-1 flex items-center gap-x-2 text-white px-4 py-4 rounded-full`}
+      className={`${className} [&>svg]:w-7 [&>svg]:h-7 flex items-center gap-x-2 text-white rounded-full`}
       type={type === 'submit' ? 'submit' : 'button'}
     >
       { children }
@@ -18,7 +18,7 @@ function Button(props) {
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string]),
+  children: PropTypes.node,
 };
 
 Button.defaultProps = {
