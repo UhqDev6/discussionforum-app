@@ -21,12 +21,12 @@ function DetailPage(props) {
 
   const dispatch = useDispatch();
 
-  const onAddComment = async ({ comment }) => {
+  const onAddComment = ({ comment }) => {
     const payload = {
       threadId: id,
       comment,
     };
-    await dispatch(asyncCreateComment(payload));
+    dispatch(asyncCreateComment(payload));
     dispatch(asyncReceiveThreadDetail(id));
     return () => {
       dispatch(clearCommentActionCreator);

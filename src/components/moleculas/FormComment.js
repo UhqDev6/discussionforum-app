@@ -11,16 +11,14 @@ function FormComment(props) {
   const { onAddComment } = props;
   const { authUser = [] } = useSelector((states) => states);
   const [comment, onCommentChange, handleResetComment] = useInput('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const onHandleComment = async (event) => {
-    setIsLoading(false);
+  const onHandleComment = (event) => {
     event.preventDefault();
     const payload = {
       comment,
     };
-    await onAddComment(payload);
-    setIsLoading(true);
+    onAddComment(payload);
     handleResetComment();
   };
 
@@ -46,7 +44,7 @@ function FormComment(props) {
               required
             />
           </div>
-          <Button type="submit" loading={isLoading}>
+          <Button type="submit">
             <MdNavigation color="#E47AB3" size="28px" className="rotate-90 -mt-2" />
           </Button>
         </form>

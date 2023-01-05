@@ -6,6 +6,8 @@ import ThreadHead from './ThreadHead';
 import ThreadTitle from './ThreadTitle';
 import ThreadBody from './ThreadBody';
 import ThreadFooter from './ThreadFooter';
+import { asyncDownVoteThread, asyncNeutralizeVoteThread, asyncUpVoteThread } from '../../states/threads/action';
+import { asyncDownVoteThreadDetail, asyncNeutralizeVoteThreadDetail, asyncUpVoteThreadDetail } from '../../states/threadDetail/action';
 
 export default function ThreadItems(props) {
   const {
@@ -15,8 +17,32 @@ export default function ThreadItems(props) {
     users,
   } = props;
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleUserDetails = (id) => users?.filter((user) => user?.id === id)[0];
+
+  const onHandleUpVoteThread = (id) => {
+    if (isDetails) {
+      dispatch(asyncUpVoteThreadDetail(id));
+      return;
+    }
+    dispatch(asyncUpVoteThread(id));
+  };
+
+  const onHandleNeutralizeVote = (id) => {
+    if (isDetails) {
+      dispatch(asyncNeutralizeVoteThreadDetail(id));
+      return;
+    }
+    dispatch(asyncNeutralizeVoteThread(id));
+  };
+
+  const onHandleDownVoteThread = (id) => {
+    if (isDetails) {
+      dispatch(asyncDownVoteThreadDetail(id));
+      return;
+    }
+    dispatch(asyncDownVoteThread(id));
+  };
 
   return (
     <div>
@@ -68,19 +94,27 @@ export default function ThreadItems(props) {
         {
           isDetails ? (
             <ThreadFooter
+              id={threadDetail?.id}
               createdAt={threadDetail?.createdAt}
               upVotesBy={threadDetail?.upVotesBy}
               downVotesBy={threadDetail?.downVotesBy}
               comments={threadDetail?.comments}
               isDetails={isDetails}
+              onHandleUpVoteThread={onHandleUpVoteThread}
+              onHandleNeutralizeVote={onHandleNeutralizeVote}
+              onHandleDownVoteThread={onHandleDownVoteThread}
             />
           ) : (
             <ThreadFooter
+              id={threads?.id}
               createdAt={threads?.createdAt}
               upVotesBy={threads?.upVotesBy}
               downVotesBy={threads?.downVotesBy}
               totalComments={threads?.totalComments}
               isDetails={isDetails}
+              onHandleUpVoteThread={onHandleUpVoteThread}
+              onHandleNeutralizeVote={onHandleNeutralizeVote}
+              onHandleDownVoteThread={onHandleDownVoteThread}
             />
           )
         }

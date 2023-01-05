@@ -183,6 +183,54 @@ const api = (() => {
     return comments;
   };
 
+  const upVoteThread = async (threadId) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  };
+
+  const downVoteThread = async (threadId) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  };
+
+  const neutralizeVoteThread = async (threadId) => {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  };
+
   const getAllLeaderBoards = async () => {
     const response = await fetch(`${BASE_URL}/leaderboards`);
     const responseJson = await response.json();
@@ -211,6 +259,9 @@ const api = (() => {
     createThread,
     getDetailThread,
     createComment,
+    upVoteThread,
+    downVoteThread,
+    neutralizeVoteThread,
   };
 })();
 

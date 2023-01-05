@@ -28,6 +28,30 @@ const toggleFilterThreadByCategory = (category) => ({
   },
 });
 
+const upVoteThreadActionCreator = ({ threadId, userId }) => ({
+  type: ActionType.UP_VOTE_THREAD,
+  payload: {
+    threadId,
+    userId,
+  },
+});
+
+const downVoteThreadActionCreator = ({ threadId, userId }) => ({
+  type: ActionType.DOWN_VOTE_THREAD,
+  payload: {
+    threadId,
+    userId,
+  },
+});
+
+const neutralizeVoteThreadActionCreator = ({ threadId, userId }) => ({
+  type: ActionType.NEUTRALIZE_VOTE_THREAD,
+  payload: {
+    threadId,
+    userId,
+  },
+});
+
 const asyncAddThread = ({ title, body, category }) => async (dispatch) => {
   try {
     dispatch(showLoading());
@@ -41,10 +65,55 @@ const asyncAddThread = ({ title, body, category }) => async (dispatch) => {
   }
 };
 
+const asyncUpVoteThread = (threadId) => async (dispatch, getState) => {
+  const { authUser } = getState();
+  try {
+    dispatch(showLoading());
+    dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
+    await api.upVoteThread(threadId);
+  } catch (err) {
+    toast.error(err?.message);
+  } finally {
+    dispatch(hideLoading());
+  }
+};
+
+const asyncDownVoteThread = (threadId) => async (dispatch, getState) => {
+  const { authUser } = getState();
+  try {
+    dispatch(showLoading());
+    dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
+    await api.downVoteThread(threadId);
+  } catch (err) {
+    toast.error(err?.message);
+  } finally {
+    dispatch(hideLoading());
+  }
+};
+
+const asyncNeutralizeVoteThread = (threadId) => async (dispatch, getState) => {
+  const { authUser } = getState();
+  try {
+    dispatch(showLoading());
+    dispatch(neutralizeVoteThreadActionCreator({ threadId, userId: authUser.id }));
+    await api.neutralizeVoteThread(threadId);
+  } catch (err) {
+    toast.error(err?.message);
+  } finally {
+    dispatch(hideLoading());
+  }
+};
+
 export {
   receiveThreadActionCreator,
   addThreadActionCreator,
   clearThreadActionCreator,
   toggleFilterThreadByCategory,
+  upVoteThreadActionCreator,
+  downVoteThreadActionCreator,
+  neutralizeVoteThreadActionCreator,
   asyncAddThread,
+  asyncUpVoteThread,
+  asyncDownVoteThread,
+  asyncNeutralizeVoteThread,
 };
