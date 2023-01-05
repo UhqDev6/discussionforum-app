@@ -50,8 +50,8 @@ const threadShape = {
   title: PropTypes.string,
   body: PropTypes.string,
   ownerId: PropTypes.string,
-  upVotesBy: PropTypes.array,
-  downVotesBy: PropTypes.array,
+  upVotes: PropTypes.array,
+  downVotes: PropTypes.array,
   totalComments: PropTypes.number,
 };
 

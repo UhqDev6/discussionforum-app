@@ -3,17 +3,32 @@ import {
   MdThumbUpAlt, MdThumbDownOffAlt, MdThumbUpOffAlt, MdThumbDownAlt, MdOutlineForum,
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import Card from './Card';
 import { postedAt } from '../../utils';
+import { asyncDownVoteComment, asyncNeutralizeVoteComment, asyncUpVoteComment } from '../../states/comment/action';
 
 function CommentList(props) {
   const {
     comment,
   } = props;
 
-  const { authUser = {} } = useSelector((states) => states);
+  const { authUser } = useSelector((states) => states);
+
+  const dispatch = useDispatch();
+
+  const onHandleUpVoteComment = (id) => {
+    dispatch(asyncUpVoteComment(id));
+  };
+
+  const onHandleDownVoteComment = (id) => {
+    dispatch(asyncDownVoteComment(id));
+  };
+
+  const onHandleNeutralizeVoteComment = (id) => {
+    dispatch(asyncNeutralizeVoteComment(id));
+  };
 
   return (
     <div>
@@ -37,11 +52,45 @@ function CommentList(props) {
         </div>
         <div className="flex gap-4 ml-14 mt-2">
           <div className="flex gap-2">
-            <MdThumbUpOffAlt color="#E47AB3" size="16px" />
+            <button
+              onClick={() => {
+                if (comment?.upVotesBy?.includes(authUser.id)) {
+                  onHandleNeutralizeVoteComment(comment?.id);
+                  return;
+                }
+                onHandleUpVoteComment(comment?.id);
+              }}
+              type="button"
+            >
+              {
+                comment?.upVotesBy?.includes(authUser.id) ? (
+                  <MdThumbUpAlt color="#E47AB3" size="16px" />
+                ) : (
+                  <MdThumbUpOffAlt color="#E47AB3" size="16px" />
+                )
+              }
+            </button>
             <span className="text-[0.75rem] ">{comment?.upVotesBy?.length || '0'}</span>
           </div>
           <div className="flex gap-2">
-            <MdThumbDownOffAlt color="#E47AB3" size="16px" />
+            <button
+              onClick={() => {
+                if (comment?.dowVotesBy?.includes(authUser.id)) {
+                  onHandleNeutralizeVoteComment(comment?.id);
+                  return;
+                }
+                onHandleDownVoteComment(comment?.id);
+              }}
+              type="button"
+            >
+              {
+                comment?.downVotesBy?.includes(authUser.id) ? (
+                  <MdThumbDownAlt color="#E47AB3" size="16px" />
+                ) : (
+                  <MdThumbDownOffAlt color="#E47AB3" size="16px" />
+                )
+              }
+            </button>
             <span className="text-[0.75rem] ">{comment?.downVotesBy?.length || '0'}</span>
           </div>
           <div className="flex items-end">
