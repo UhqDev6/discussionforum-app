@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BsGraphUp, BsChatSquareText, BsBoxArrowRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { sidebarDatas } from '../../utils/siderbarDatas';
-import Button from './Button';
 import { HOME_PAGE, LEADER_BOARDS_PAGE } from '../../constants/path';
 
 function NavbarData({ signOut }) {

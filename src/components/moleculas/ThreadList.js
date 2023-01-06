@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Card from '../atoms/Card';
-import ThreadBody from '../atoms/ThreadBody';
-import ThreadTitle from '../atoms/ThreadTitle';
-import ThreadHead from '../atoms/ThreadHead';
-import ThreadFooter from '../atoms/ThreadFooter';
 import ThreadItems from '../atoms/ThreadItems';
-// import ThreadItems from '../atoms/ThreadItems';
 
 function ThreadList(props) {
   const {

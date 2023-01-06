@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  MdThumbUpAlt, MdThumbDownOffAlt, MdThumbUpOffAlt, MdThumbDownAlt, MdOutlineForum,
+  MdThumbUpAlt, MdThumbDownOffAlt, MdThumbUpOffAlt, MdThumbDownAlt,
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';

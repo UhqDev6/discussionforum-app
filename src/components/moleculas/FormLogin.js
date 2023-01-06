@@ -47,7 +47,7 @@ function FormLogin({ login }) {
         </div>
         <div className="w-full mt-4">
           <p className="text-slate-600 text-base">
-            Dont have an account yet ?
+            Don`t have an account yet ?
             {' '}
             <Link to="/register" className="underline">Create your account</Link>
           </p>

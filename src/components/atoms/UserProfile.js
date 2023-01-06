@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import userForum from '../../assets/ul.jpg';
 
 function UserProfile({ authUser }) {
   const { name, email, avatar } = authUser;

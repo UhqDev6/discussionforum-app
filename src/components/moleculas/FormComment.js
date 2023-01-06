@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { MdNavigation, MdOutlineSend } from 'react-icons/md';
+import { MdNavigation } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Card from '../atoms/Card';
-import ul from '../../assets/ul.jpg';
 import useInput from '../../hooks/useInput';
 import Button from '../atoms/Button';
 
@@ -11,18 +10,16 @@ function FormComment(props) {
   const { onAddComment } = props;
   const { authUser = [] } = useSelector((states) => states);
   const [comment, onCommentChange, handleResetComment] = useInput('');
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onHandleComment = (event) => {
+    setIsLoading(true);
     event.preventDefault();
-    const payload = {
-      comment,
-    };
-    onAddComment(payload);
+    onAddComment({ comment });
+    setIsLoading(false);
     handleResetComment();
   };
 
-  // console.log(authUser);
   return (
     <div>
       <Card.Body>
@@ -44,7 +41,7 @@ function FormComment(props) {
               required
             />
           </div>
-          <Button type="submit">
+          <Button type="submit" isLoading={isLoading}>
             <MdNavigation color="#E47AB3" size="28px" className="rotate-90 -mt-2" />
           </Button>
         </form>

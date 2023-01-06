@@ -11,13 +11,13 @@ function FormThread(props) {
   const [title, onTitleChange] = useInput('');
   const [category, onCategoryChange] = useInput('');
   const [body, onBodyChange] = useInput('');
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAddThread = async (event) => {
-    setIsloading(false);
+  const handleAddThread = (event) => {
+    setIsLoading(false);
     event.preventDefault();
-    await onAddThread({ title, category, body });
-    setIsloading(true);
+    onAddThread({ title, category, body });
+    setIsLoading(true);
   };
 
   return (

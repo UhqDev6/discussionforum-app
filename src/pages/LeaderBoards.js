@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ul from '../assets/ul.jpg';
 import { asyncReceiveLeaderboard } from '../states/leaderBoards/action';
 
 function LeaderBoards() {

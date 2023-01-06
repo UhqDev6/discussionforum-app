@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { DETAIL_PAGE } from '../../constants/path';
 
 function ThreadTitle(props) {
   const {

@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import MostPopular from '../components/moleculas/MostPopular';
-import Sidebar from '../components/moleculas/Sidebar';
-import Card from '../components/atoms/Card';
 import ThreadList from '../components/moleculas/ThreadList';
 import { asyncPopulateUserAndThreads } from '../states/shared/action';
 import {

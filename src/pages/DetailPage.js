@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Card from '../components/atoms/Card';
 import CommentList from '../components/atoms/CommentList';
 import ThreadItems from '../components/atoms/ThreadItems';
 import WrapperView from '../components/atoms/WrapperView';
 import FormComment from '../components/moleculas/FormComment';
-import ThreadList from '../components/moleculas/ThreadList';
-import { asyncCreateComment, clearCommentActionCreator } from '../states/comment/action';
+import { asyncCreateComment } from '../states/comment/action';
 import { asyncReceiveThreadDetail } from '../states/threadDetail/action';
 
-function DetailPage(props) {
-  const { filteredId } = props;
+function DetailPage() {
   const { id } = useParams();
 
   const {
@@ -28,14 +25,11 @@ function DetailPage(props) {
     };
     dispatch(asyncCreateComment(payload));
     dispatch(asyncReceiveThreadDetail(id));
-    return () => {
-      dispatch(clearCommentActionCreator);
-    };
   };
 
   useEffect(() => {
     dispatch(asyncReceiveThreadDetail(id));
-  }, [dispatch]);
+  }, [id, dispatch]);
 
   return (
     <WrapperView>
@@ -46,7 +40,7 @@ function DetailPage(props) {
             <FormComment comments={comments} onAddComment={onAddComment} />
             {
               comments?.map((comment) => (
-                <div key={`${comment?.id}-filteredId`}>
+                <div key={`${comment?.id}`}>
                   <CommentList key={comment?.id} comment={comment} />
                 </div>
               ))
@@ -57,13 +51,5 @@ function DetailPage(props) {
     </WrapperView>
   );
 }
-
-DetailPage.defaultProps = {
-  filteredId: 'id-detail',
-};
-
-DetailPage.propTypes = {
-  filteredId: PropTypes.string,
-};
 
 export default DetailPage;

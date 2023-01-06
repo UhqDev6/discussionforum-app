@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { toast } from 'react-toastify';
 import { ActionType } from '../../constants/ActionType';

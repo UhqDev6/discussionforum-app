@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Card from './Card';
 import ThreadHead from './ThreadHead';
 import ThreadTitle from './ThreadTitle';

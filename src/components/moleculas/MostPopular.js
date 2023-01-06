@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { setFilteredActionCreator } from '../../states/filtered/action';
-import Button from '../atoms/Button';
 
 function MostPopular(props) {
   const {
@@ -11,14 +9,9 @@ function MostPopular(props) {
   } = props;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleFilterThreadByCategory = (key) => {
     dispatch(setFilteredActionCreator(key));
-  };
-
-  const handleResetFilter = () => {
-    navigate('/');
   };
 
   return (
