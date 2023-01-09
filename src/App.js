@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Loading from './components/atoms/Loading';
 import Spinner from './components/atoms/Spinner';
-import Footer from './components/moleculas/Footer';
 import Header from './components/moleculas/Header';
 import Navbar from './components/moleculas/Navbar';
 import Sidebar from './components/moleculas/Sidebar';
