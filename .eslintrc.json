@@ -2,7 +2,9 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true,
+    "cypress/globals": true
   },
   "extends": ["plugin:react/recommended", "airbnb", "react-app"],
   "overrides": [],
@@ -10,7 +12,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "cypress"],
   "rules": {
     "linebreak-style": "off",
     "no-alert": "off",

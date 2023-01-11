@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e": "cypress run",
+    "ci:test": "react-scripts test --watchAll=false && start-server-and-test start http-get://0.0.0.0:3000 e2e"
   },
   "eslintConfig": {
     "extends": [
@@ -46,8 +48,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "cypress": "^12.3.0",
     "eslint": "^8.30.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.11",
