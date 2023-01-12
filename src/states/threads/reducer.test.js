@@ -5,6 +5,7 @@
  *  - should return the threads with the new threads when given by ADD_THREADS action
  *  - should test upVote on the thread
  *  - should test downVote on the thread
+ *  - should test neutralVote on the thread
  */
 
 import threadsReducer from './reducer';
@@ -181,6 +182,43 @@ describe('threadsReducer function', () => {
         ...initialState[0],
         downVotesBy: [action.payload.userId],
         upVotesBy: [],
+      },
+    ]);
+  });
+
+  it('should test neutralVote on the thread', () => {
+    // arrange
+    const initialState = [
+      {
+        id: 'thread-1',
+        title: 'Pengalaman Belajar React di Dicoding',
+        body: 'Menurut teman-teman, bagaimana pengalaman belajar kelas React di Dicoding? Apakah mudah ataukah sulit? Yuk, ceritakan di sini.',
+        category: 'react',
+        createdAt: '2022-11-13T09:59:31.019Z',
+        ownerId: 'user-5PqX6Ldhnk_ifroq',
+        totalComments: 1,
+        upVotesBy: [],
+        downVotesBy: [],
+      },
+    ];
+
+    const action = {
+      type: 'NEUTRALIZE_VOTE_THREAD',
+      payload: {
+        threadId: 'thread-1',
+        userId: 'user-1',
+      },
+    };
+
+    // action
+    const nextState = threadsReducer(initialState, action);
+
+    // assert
+    expect(nextState).toEqual([
+      {
+        ...initialState[0],
+        upVotesBy: [],
+        downVotesBy: [],
       },
     ]);
   });
