@@ -1,10 +1,14 @@
 name: Continuous Integration
-
+#on is an event that can trigger an action to run. We rated this property with
+# pull_request and the main branch because we want the action to be executed when there is a pull request to the main branch.
 on:
   pull_request:
     branches:
       - main
 
+# jobs is a property that defines action steps. One GitHub action can consist of multiple actions.
+# In this case, we only define one job, namely job-test-automation. Within the job, we define the workflow,
+# such as defining the plugin used and specifying the script to run.
 jobs:
   automation-test-job:
     runs-on: ubuntu-latest
