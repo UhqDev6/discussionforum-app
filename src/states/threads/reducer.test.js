@@ -1,5 +1,5 @@
 /**
- * test scenario for threadReducer
+ * test scenario for threadsReducer
  *  - should return the initial state when given by unknown action
  *  - should return thread when given RECEIVE_THREADS action
  *  - should return the threads with the new threads when given by ADD_THREADS action
