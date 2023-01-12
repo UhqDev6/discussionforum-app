@@ -5,7 +5,7 @@
  *  - should return the threads with the new threads when given by ADD_THREADS action
  *  - should test upVote on the thread
  *  - should test downVote on the thread
- *  - should test neutralizeVote on the thread
+ *  - should test neutralVote on the thread
  */
 
 import threadsReducer from './reducer';
@@ -186,7 +186,7 @@ describe('threadsReducer function', () => {
     ]);
   });
 
-  it('should test neutralizeVote on the thread', () => {
+  it('should test neutralVote on the thread', () => {
     // arrange
     const initialState = [
       {
