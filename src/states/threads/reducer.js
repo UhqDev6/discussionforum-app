@@ -38,7 +38,7 @@ const threadsReducer = (threads = [], action = {}) => {
       return threads.map((thread) => {
         if (thread.id === action.payload.threadId) {
           return {
-            ...thread,
+            ...threads,
             upVotesBy: thread.upVotesBy.filter((id) => id !== action.payload.userId),
             downVotesBy: thread.downVotesBy.filter((id) => id !== action.payload.userId),
           };
