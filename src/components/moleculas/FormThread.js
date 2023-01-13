@@ -14,10 +14,10 @@ function FormThread(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAddThread = (event) => {
-    setIsLoading(false);
+    setIsLoading(true);
     event.preventDefault();
     onAddThread({ title, category, body });
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   return (

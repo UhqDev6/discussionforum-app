@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../atoms/Button';
@@ -7,10 +7,13 @@ import useInput from '../../hooks/useInput';
 function FormLogin({ login }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
+    setIsLoading(true);
     login(({ email, password }));
+    setIsLoading(false);
   };
 
   return (
@@ -40,6 +43,7 @@ function FormLogin({ login }) {
         <div className="w-full mt-4">
           <Button
             type="submit"
+            loading={isLoading}
             className="hover:from-pink-300 text-base justify-center hover:to-yellow-100 bg-gradient-to-r bg-white w-full h-10 rounded-md border-[1px] border-pink-400 hover:border-none text-pink-400 hover:text-white"
           >
             Sign in

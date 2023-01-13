@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../atoms/Button';
@@ -8,10 +8,13 @@ function FormRegister({ register }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     register({ name, email, password });
+    setIsLoading(false);
   };
 
   return (
@@ -51,6 +54,7 @@ function FormRegister({ register }) {
         <div className="w-full mt-4">
           <Button
             type="submit"
+            loading={isLoading}
             className="hover:from-pink-300 justify-center hover:to-yellow-100 bg-gradient-to-r bg-white w-full h-10 rounded-md border-[1px] border-pink-400 hover:border-none text-pink-400 hover:text-white"
           >
             Register

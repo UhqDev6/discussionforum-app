@@ -41,7 +41,7 @@ function FormComment(props) {
               required
             />
           </div>
-          <Button type="submit" isLoading={isLoading}>
+          <Button type="submit" loading={isLoading}>
             <MdNavigation color="#E47AB3" size="28px" className="rotate-90 -mt-2" />
           </Button>
         </form>
