@@ -66,39 +66,42 @@ const asyncAddThread = ({ title, body, category }) => async (dispatch) => {
 };
 
 const asyncUpVoteThread = (threadId) => async (dispatch, getState) => {
-  const { authUser } = getState();
+  const { authUser, threads } = getState();
   try {
     dispatch(showLoading());
     dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
     await api.upVoteThread(threadId);
   } catch (err) {
     toast.error(err?.message);
+    dispatch(receiveThreadActionCreator(threads));
   } finally {
     dispatch(hideLoading());
   }
 };
 
 const asyncDownVoteThread = (threadId) => async (dispatch, getState) => {
-  const { authUser } = getState();
+  const { authUser, threads } = getState();
   try {
     dispatch(showLoading());
     dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
     await api.downVoteThread(threadId);
   } catch (err) {
     toast.error(err?.message);
+    dispatch(receiveThreadActionCreator(threads));
   } finally {
     dispatch(hideLoading());
   }
 };
 
 const asyncNeutralizeVoteThread = (threadId) => async (dispatch, getState) => {
-  const { authUser } = getState();
+  const { authUser, threads } = getState();
   try {
     dispatch(showLoading());
     dispatch(neutralizeVoteThreadActionCreator({ threadId, userId: authUser.id }));
     await api.neutralizeVoteThread(threadId);
   } catch (err) {
     toast.error(err?.message);
+    dispatch(receiveThreadActionCreator(threads));
   } finally {
     dispatch(hideLoading());
   }
