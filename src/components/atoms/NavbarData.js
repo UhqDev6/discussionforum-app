@@ -33,7 +33,7 @@ function NavbarData({ signOut }) {
             type="button"
             onClick={signOut}
           >
-            Logout
+            Sign Out
           </button>
         </div>
       </div>
