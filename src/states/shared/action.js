@@ -1,4 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { receiveThreadActionCreator } from '../threads/action';
 import { receiverUserActionCreator } from '../users/action';
@@ -12,7 +13,7 @@ const asyncPopulateUserAndThreads = () => async (dispatch) => {
     dispatch(receiverUserActionCreator(users));
     dispatch(receiveThreadActionCreator(threads));
   } catch (err) {
-    alert(err.message);
+    toast.error(err?.message);
   } finally {
     dispatch(hideLoading());
   }
