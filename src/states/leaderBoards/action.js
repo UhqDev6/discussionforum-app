@@ -1,4 +1,5 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import { toast } from 'react-toastify';
 import { ActionType } from '../../constants/ActionType';
 import api from '../../utils/api';
 
@@ -20,7 +21,7 @@ const asyncReceiveLeaderboard = () => async (dispatch) => {
     const leaderBoards = await api.getAllLeaderBoards();
     dispatch(receiveLeaderboardActionCreator(leaderBoards));
   } catch (err) {
-    alert(err.message);
+    toast.error(err?.message);
   } finally {
     dispatch(hideLoading());
   }
