@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { MdNavigation } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import Card from '../atoms/Card';
 import useInput from '../../hooks/useInput';
 import Button from '../atoms/Button';
 
 function FormComment(props) {
-  const { onAddComment } = props;
-  const { authUser = [] } = useSelector((states) => states);
+  const { onAddComment, authUser } = props;
   const [comment, onCommentChange, handleResetComment] = useInput('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +25,7 @@ function FormComment(props) {
           <div className="max-w-[2rem] max-h-[2rem] rounded-full left-0 mt-[4px]">
             <img
               src={authUser?.avatar}
-              alt={authUser?.avarar}
+              alt={authUser?.avatar}
               className="w-full h-full rounded-full object-cover"
             />
           </div>
@@ -38,6 +36,7 @@ function FormComment(props) {
               value={!comment ? '' : comment}
               onChange={onCommentChange}
               placeholder="Write comment..."
+              data-testid="threadComment"
               required
             />
           </div>
@@ -52,6 +51,11 @@ function FormComment(props) {
 
 FormComment.propTypes = {
   onAddComment: PropTypes.func.isRequired,
+  authUser: PropTypes.string,
+};
+
+FormComment.defaultProps = {
+  authUser: '',
 };
 
 export default FormComment;

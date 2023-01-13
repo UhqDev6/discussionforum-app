@@ -13,7 +13,7 @@ function DetailPage() {
   const { id } = useParams();
 
   const {
-    detailThread = [], users = [], comments = [],
+    detailThread = [], users = [], comments = [], authUser,
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function DetailPage() {
         <div className="h-[524px] overflow-scroll scroll-smooth -ml-20 p-8 -mt-8 md:ml-10 md:p-0 md:mt-2">
           <Card>
             <ThreadItems isDetails threadDetail={detailThread} users={users} />
-            <FormComment comments={comments} onAddComment={onAddComment} />
+            <FormComment comments={comments} onAddComment={onAddComment} authUser={authUser} />
             {
               comments?.map((comment) => (
                 <div key={`${comment?.id}`}>
