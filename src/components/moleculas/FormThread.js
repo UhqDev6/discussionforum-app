@@ -32,6 +32,7 @@ function FormThread(props) {
               value={title}
               onChange={onTitleChange}
               placeholder="Title"
+              data-testid="reactJs"
               required
             />
           </div>
@@ -42,6 +43,7 @@ function FormThread(props) {
               value={category}
               onChange={onCategoryChange}
               placeholder="Category"
+              data-testid="redux"
               required
             />
           </div>
@@ -52,6 +54,7 @@ function FormThread(props) {
               value={body}
               onChange={onBodyChange}
               placeholder="What do you think... ?"
+              data-testid="learnRedux"
               required
             />
           </div>
