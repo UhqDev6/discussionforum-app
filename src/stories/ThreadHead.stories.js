@@ -13,10 +13,17 @@ function TemplateStory(args) {
 }
 
 const WithThreadHeadOnThreads = TemplateStory.bind({});
+const WithThreadHeadOnThreadDetail = TemplateStory.bind({});
 WithThreadHeadOnThreads.args = {
   name: 'Dicoding',
   avatar: 'https://ui-avatars.com/api/?name=Dicoding&background=random',
   isDetails: false,
 };
 
-export { WithThreadHeadOnThreads };
+WithThreadHeadOnThreadDetail.args = {
+  name: 'Dicoding',
+  avatar: 'https://ui-avatars.com/api/?name=Dicoding&background=random',
+  isDetails: true,
+};
+
+export { WithThreadHeadOnThreads, WithThreadHeadOnThreadDetail };
